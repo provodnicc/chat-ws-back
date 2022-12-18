@@ -21,6 +21,7 @@ export class MessangerService {
       console.log('currentChat ', currentChatId)
       let message = new Message()
       message.u_id = socket.id
+      message.uname = createMessangerDto.uname
       message.message = createMessangerDto.message
         
       this.messanger[currentChatId].messages.push(message)
@@ -36,6 +37,7 @@ export class MessangerService {
 
     let message = new Message()
     message.u_id = socket.id
+    message.uname = createMessangerDto.uname
     message.message = createMessangerDto.message
 
     messanger.messages.push(message)

@@ -9,5 +9,6 @@ export class Chat {
 
 export class Message{
     u_id: string
+    uname: string
     message: string
 }
