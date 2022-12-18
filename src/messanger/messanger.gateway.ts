@@ -69,7 +69,7 @@ export class MessangerGateway implements OnGatewayInit, OnGatewayConnection, OnG
     console.log('conn', data.room_id)
     socket.join(String(data.room_id))
     console.log(socket.rooms)
-    this.server.emit('connection', 'user connected to room: ' + data.room_id)
+    this.server.to(String(data.room_id)).emit('connection', 'user connected to room: ' + data.room_id)
     const chat = this.messangerService.findMessage(data.room_id)
     this.server.to(String(data.room_id)).emit('messanger', chat)
   }
