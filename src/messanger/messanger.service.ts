@@ -9,16 +9,11 @@ export class MessangerService {
   messanger: Chat[] = []
   create(createMessangerDto: CreateMessangerDto, socket: Socket) {
       console.log('\n')
-      let currentChatId
 
-    const chat = this.messanger.filter((chat: Chat, index: number)=>{
-      console.log(chat, (chat.chat_id == createMessangerDto.chat_id))
-      currentChatId = index
-      return chat.chat_id == createMessangerDto.chat_id
-    })
+    const [chat, currentChatId] = this.getChat(createMessangerDto.chat_id)
 
-    if(chat.length){
-      console.log('currentChat ', currentChatId)
+    if(chat){
+      console.log('currentChat ', createMessangerDto.chat_id)
       let message = new Message()
       message.u_id = socket.id
       message.uname = createMessangerDto.uname
@@ -29,7 +24,8 @@ export class MessangerService {
         console.log('messanger', chat)
       })
       console.log('\n')
-      return this.messanger[currentChatId].messages
+      let [currChat, index] = this.getChat(createMessangerDto.chat_id)
+      return currChat
     }
 
     let messanger: Chat = new Chat()
@@ -49,15 +45,28 @@ export class MessangerService {
     })
     console.log('\n')
 
-    return messanger.messages
+    return messanger
   }
+
+  getChat(chatId: string){
+    let currentChatId
+    const chat = this.messanger.filter((chat, index: number)=>{
+      if (chat.chat_id === chatId){
+        currentChatId = index
+        return true
+      }
+    })[0]
+
+    return [chat, currentChatId]
+  }
+
 
   findMessage(chat_id: string) {
     const chat = this.messanger.filter((chat: Chat, index: number)=>{
       return chat.chat_id == chat_id
     })
 
-    return chat[0].messages;
+    return chat[0];
   }
 
   findOne(id: number) {

@@ -15,7 +15,10 @@ import { CreateMessangerDto } from './dto/create-messanger.dto';
 import { Logger, UseGuards } from '@nestjs/common';
 import { ATGuard } from 'src/auth/guards/AT.guard';
 
-@WebSocketGateway({cors: '*'})
+@WebSocketGateway({
+  transports: ['websocket'], 
+  cors: '*'
+})
 export class MessangerGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect{
   constructor(private readonly messangerService: MessangerService) {}
   logger: Logger = new Logger(MessangerGateway.name)
@@ -51,7 +54,7 @@ export class MessangerGateway implements OnGatewayInit, OnGatewayConnection, OnG
   ){
     data = JSON.parse(data)
     socket.leave(String(data.room_id))
-    console.log('leave', data.room_id)
+    this.logger.error('leave', data.room_id)
     this.server.emit('leave', 'user leave from room: ' + data.room_id)
 
   }
@@ -67,9 +70,11 @@ export class MessangerGateway implements OnGatewayInit, OnGatewayConnection, OnG
   ){
     data = JSON.parse(data)
     console.log('conn', data.room_id)
+    
     socket.join(String(data.room_id))
-    console.log(socket.rooms)
-    this.server.to(String(data.room_id)).emit('connection', 'user connected to room: ' + data.room_id)
+    
+    this.server.to(String(data.room_id)).emit('connection', 'user '+ data.uname + '\nconnected to room: ' + data.room_id)
+
     const chat = this.messangerService.findMessage(data.room_id)
     this.server.to(String(data.room_id)).emit('messanger', chat)
   }
@@ -80,10 +85,14 @@ export class MessangerGateway implements OnGatewayInit, OnGatewayConnection, OnG
 
   handleConnection(client: Socket, ...args: any[]) {
     this.logger.log('connected ' + client.id)
+    client.rooms.forEach((room)=>{
+      this.logger.verbose('room ' + room) 
+    })
+    console.log()
   }
 
   handleDisconnect(client: Socket) {
-    this.logger.warn('disconnected ' + client.id, client.rooms)
+    this.logger.warn('disconnected ' + client.id)
   }
 
 }
