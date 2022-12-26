@@ -12,6 +12,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+      - name:
       - name: install modules
         run: npm install
       - name: build project
@@ -20,5 +21,3 @@ jobs:
         run: npm run lint
       - name: test project
         run: npm run test
-      - name: test:e2e project
-        run: npm run test:e2e
