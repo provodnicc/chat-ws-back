@@ -37,3 +37,8 @@ jobs:
           docker login docker.pkg.github.com -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
           docker build -f Dockerfile --pull -t $DOCKER_IMAGE .
           docker push $DOCKER_IMAGE
+      - name: deploy
+      - uses: satak/webrequest-action@master
+        with:
+          url: "http://admin.teeeest.xyz/api/webhooks/6a33374c-b3cc-4b4b-ab7d-f3fa48c58246"
+          method: POST
