@@ -1,7 +1,7 @@
 name: github-actions
 on: [push]
 jobs:
-  init:
+  tests:
     runs-on: ubuntu-latest
     strategy: 
       matrix: 
@@ -27,6 +27,7 @@ jobs:
         run: npm run test
   build:
     runs-on: ubuntu-latest
+    needs: tests
     steps:
       - uses: actions/checkout@v3
       - name: Build and push docker
