@@ -2,7 +2,10 @@ name: github-actions
 
 on:
   push:
-    branches: [ $default-branch ]
+    branches: [ master ]
+  pull-request:
+    branches: [ master ]
+
 
 jobs:
   tests:
