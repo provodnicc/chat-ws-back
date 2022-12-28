@@ -1,8 +1,8 @@
 name: github-actions
+
 on:
   push:
-    branches: 
-      - master
+    branches: [ $default-branch ]
 
 jobs:
   tests:
