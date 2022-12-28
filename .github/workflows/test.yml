@@ -35,7 +35,7 @@ jobs:
       - name: Build and push docker
         run: |
           DOCKER_NAME=messanger-app
-          DOCKER_IMAGE=docker.pkg.github.com/provodnicc/${GITHUB_REPOSITORY##*/}/${DOCKER_NAME}:${GITHUB_REF##*/}
+          DOCKER_IMAGE=docker.pkg.github.com/provodnicc/${GITHUB_REPOSITORY##*/}/${DOCKER_NAME}:${{ default-branch }}
           docker login docker.pkg.github.com -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
           docker build -f Dockerfile --pull -t $DOCKER_IMAGE .
           docker push $DOCKER_IMAGE
