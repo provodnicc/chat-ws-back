@@ -1,4 +1,4 @@
-name: test
+name: test&deploy
 
 on:
   [push]
@@ -28,18 +28,6 @@ jobs:
       
       - name: test project
         run: npm run test
-
-
-name: deploy
-
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
-
-jobs:
   build:
     runs-on: ubuntu-latest
     needs: tests
