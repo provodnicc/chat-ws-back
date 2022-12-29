@@ -1,7 +1,7 @@
 FROM node
 
 EXPOSE 9009
-EXPOSE 5432
+
 
 
 WORKDIR /app
