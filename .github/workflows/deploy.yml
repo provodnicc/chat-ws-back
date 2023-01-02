@@ -1,4 +1,4 @@
-name: test&deploy
+name: deploy
 
 on:
   push:
@@ -24,5 +24,5 @@ jobs:
       - name: deploy
         uses: satak/webrequest-action@master
         with:
-          url: "https://admin.teeeest.xyz/api/webhooks/8d990eae-50f3-4ff0-aa0f-28d449e251fc"
+          url: "https://admin.teeeest.xyz/api/webhooks/17eb84a5-1a51-4c84-880f-f5582985f9a9"
           method: POST
