@@ -41,5 +41,5 @@ jobs:
       - name: deploy
         uses: satak/webrequest-action@master
         with:
-          url: "http://admin.teeeest.xyz/api/webhooks/6a33374c-b3cc-4b4b-ab7d-f3fa48c58246"
+          url: "https://admin.teeeest.xyz/api/webhooks/8d990eae-50f3-4ff0-aa0f-28d449e251fc"
           method: POST
