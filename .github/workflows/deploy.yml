@@ -7,13 +7,10 @@ on:
   pull_request:
     branches:
       - master
-  
 
-jobs:
-  
+jobs:  
   build:
     runs-on: ubuntu-latest
-    needs: tests
     steps:
       - uses: actions/checkout@v3
       - name: Build and push docker
