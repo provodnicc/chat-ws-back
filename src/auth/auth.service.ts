@@ -9,7 +9,7 @@ export class AuthService {
   }
 
   findAll() {
-    return `This action returns all auth`;
+    return `старая версия ${new Date()}`;
   }
 
   findOne(id: number) {
