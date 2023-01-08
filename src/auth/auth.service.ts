@@ -11,7 +11,7 @@ export class AuthService {
 
   findAll() {
     
-    return `старая версия ${new Date()}`;
+    return `новая версия ${new Date()}`;
   }
 
   findOne(id: number) {
